@@ -1,23 +1,25 @@
-const express = require("express");
-const fs = require("fs");
+import express, { json } from "express";
+import { appendFileSync } from "fs";
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
 
 app.post("/halo", (req,res)=>{
 
     console.log(req.body);
 
-    fs.appendFileSync(
+    appendFileSync(
         "halo.log",
         new Date()+" "+JSON.stringify(req.body)+"\n"
     );
+
+
 
     res.send("OK");
 });
 
 
-app.listen(5000,()=>{
+app.listen(6000,()=>{
     console.log("Server running");
 });
